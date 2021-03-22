@@ -1,0 +1,117 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Tinyspec",
+  "patterns": [
+    {
+      "include": "#tinyspec-type-interface"
+    }
+  ],
+  "repository": {
+    "tinyspec-type-interface": {
+      "name": "meta.type.interface.tinyspec",
+      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)?",
+      "end": "(?=.)",
+      "applyEndPatternLast": 1,
+      "captures": {
+        "1": { "name": "support.type.tinyspec" }
+      },
+      "patterns": [
+        {
+          "name": "meta.enum.tinyspec",
+          "begin": "\\s*\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.operation.tinyspec"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.operation.tinyspec"
+            }
+          }
+        },
+        {
+          "begin": "\\s*(<)\\s*",
+          "end": "\\s*(?={)",
+          "beginCaptures": {
+            "1": { "name": "keyword.extends.tinyspec" }
+          },
+          "patterns": [
+            {
+              "match": "\\s*([_A-Za-z][_0-9A-Za-z]*)",
+              "captures": {
+                "1": { "name": "support.type.tinyspec" }
+              }
+            },
+            { "include": "#tinyspec-comma" }
+          ]
+        },
+        { "include": "#tinyspec-type-object" },
+        { "include": "#tinyspec-ignore-spaces" }
+      ]
+    },
+    "tinyspec-type-object": {
+      "name": "meta.type.object.tinyspec",
+      "begin": "\\s*({)",
+      "end": "\\s*(})",
+      "beginCaptures": {
+        "1": { "name": "punctuation.operation.tinyspec" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.operation.tinyspec" }
+      },
+      "patterns": [{ "include": "#tinyspec-type-definition" }]
+    },
+    "tinyspec-type-definition": {
+      "comment": "key (optionalArgs): Type",
+      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)(?=\\s*\\(|:)",
+      "end": "(?=\\s*(([_A-Za-z][_0-9A-Za-z]*)\\s*(\\(|:)|(})))|\\s*(,)",
+      "beginCaptures": {
+        "1": { "name": "variable.tinyspec" }
+      },
+      "endCaptures": {
+        "5": { "name": "punctuation.comma.tinyspec" }
+      },
+      "patterns": [
+        { "include": "#tinyspec-type-object" },
+        { "include": "#tinyspec-colon" },
+        { "include": "#tinyspec-input-types" }
+      ]
+    },
+    "tinyspec-input-types": {
+      "patterns": [
+        {
+          "name": "meta.type.list.tinyspec",
+          "begin": "\\s*(\\[)",
+          "end": "\\s*(\\])(?:\\s*(!))?",
+          "captures": {
+            "1": { "name": "meta.brace.square.tinyspec" },
+            "2": { "name": "keyword.operator.nulltype.tinyspec" }
+          },
+          "patterns": [
+            { "include": "#tinyspec-input-types" },
+            { "include": "#tinyspec-comma" }
+          ]
+        }
+      ]
+    },
+    "tinyspec-colon": {
+      "match": "\\s*(:)",
+      "captures": {
+        "1": { "name": "punctuation.colon.tinyspec" }
+      }
+    },
+    "tinyspec-comma": {
+      "match": "\\s*(,)",
+      "captures": {
+        "1": { "name": "punctuation.comma.tinyspec" }
+      }
+    },
+    "tinyspec-ignore-spaces": {
+      "match": "\\s*"
+    }
+  },
+
+  "scopeName": "source.tinyspec"
+}

@@ -1,0 +1,25 @@
+{
+    "name": "tinyspec-lang",
+    "displayName": "Tinyspec Lang",
+    "description": "Syntax highlighting for tinyspec",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "tinyspec",
+            "aliases": ["Tinyspec", "tinyspec"],
+            "extensions": [".tinyspec"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "tinyspec",
+            "scopeName": "source.tinyspec",
+            "path": "./syntaxes/tinyspec.tmLanguage.json"
+        }]
+    }
+}
