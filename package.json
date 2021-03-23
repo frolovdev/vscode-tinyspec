@@ -1,25 +1,46 @@
 {
-    "name": "tinyspec-lang",
-    "displayName": "Tinyspec Lang",
-    "description": "Syntax highlighting for tinyspec",
-    "version": "0.0.1",
-    "engines": {
-        "vscode": "^1.54.0"
-    },
-    "categories": [
-        "Programming Languages"
+  "name": "tinyspec-lang",
+  "displayName": "Tinyspec Lang",
+  "description": "Syntax highlighting for tinyspec",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.54.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frolovdev/vscode-tinyspec"
+  },
+  "license": "MIT",
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "tinyspec",
+    "api",
+    "openapi",
+    "swagger"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "tinyspec",
+        "aliases": [
+          "Tinyspec",
+          "tinyspec"
+        ],
+        "extensions": [
+          ".models.tinyspec"
+        ],
+        "configuration": "./language-configuration.json"
+      }
     ],
-    "contributes": {
-        "languages": [{
-            "id": "tinyspec",
-            "aliases": ["Tinyspec", "tinyspec"],
-            "extensions": [".models.tinyspec"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "tinyspec",
-            "scopeName": "source.tinyspec",
-            "path": "./syntaxes/tinyspec.tmLanguage.json"
-        }]
-    }
+    "grammars": [
+      {
+        "language": "tinyspec",
+        "scopeName": "source.tinyspec",
+        "path": "./syntaxes/tinyspec.tmLanguage.json"
+      }
+    ]
+  }
 }
