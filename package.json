@@ -1,7 +1,9 @@
 {
   "name": "tinyspec-lang",
   "displayName": "Tinyspec Lang",
-  "description": "Syntax highlighting for tinyspec",
+  "description": "Language support for tinyspec",
+  "publisher": "frolovdev",
+  "author": "frolovdev",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.54.0"
