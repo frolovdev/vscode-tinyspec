@@ -13,7 +13,7 @@
         "languages": [{
             "id": "tinyspec",
             "aliases": ["Tinyspec", "tinyspec"],
-            "extensions": [".tinyspec"],
+            "extensions": [".models.tinyspec"],
             "configuration": "./language-configuration.json"
         }],
         "grammars": [{

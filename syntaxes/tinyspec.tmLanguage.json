@@ -2,6 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Tinyspec",
   "patterns": [
+    { "include": "#tinyspec-comment" },
+    { "include": "#tinyspec-model-description-comment" },
     {
       "include": "#tinyspec-type-interface"
     }
@@ -9,28 +11,14 @@
   "repository": {
     "tinyspec-type-interface": {
       "name": "meta.type.interface.tinyspec",
-      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)?",
+      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)?\\s*(!)?",
       "end": "(?=.)",
       "applyEndPatternLast": 1,
       "captures": {
-        "1": { "name": "support.type.tinyspec" }
+        "1": { "name": "support.type.tinyspec" },
+        "2": { "name": "keyword.operator.strict.tinyspec" }
       },
       "patterns": [
-        {
-          "name": "meta.enum.tinyspec",
-          "begin": "\\s*\\(",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.operation.tinyspec"
-            }
-          },
-          "end": "\\)",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.operation.tinyspec"
-            }
-          }
-        },
         {
           "begin": "\\s*(<)\\s*",
           "end": "\\s*(?={)",
@@ -47,6 +35,8 @@
             { "include": "#tinyspec-comma" }
           ]
         },
+        { "include": "#tinyspec-comment" },
+        { "include": "#tinyspec-enum" },
         { "include": "#tinyspec-type-object" },
         { "include": "#tinyspec-ignore-spaces" }
       ]
@@ -61,38 +51,108 @@
       "endCaptures": {
         "1": { "name": "punctuation.operation.tinyspec" }
       },
-      "patterns": [{ "include": "#tinyspec-type-definition" }]
+      "patterns": [
+        { "include": "#tinyspec-comment" },
+        { "include": "#tinyspec-type-definition" }
+      ]
     },
     "tinyspec-type-definition": {
       "comment": "key (optionalArgs): Type",
-      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)(?=\\s*\\(|:)",
-      "end": "(?=\\s*(([_A-Za-z][_0-9A-Za-z]*)\\s*(\\(|:)|(})))|\\s*(,)",
+      "begin": "\\s*([_A-Za-z][_0-9A-Za-z]*)(?=\\s*(\\?)?(\\:)?)",
+      "end": "(?=\\s*(([_A-Za-z][_0-9A-Za-z]*)\\s*(\\:)|(})))|\\s*(,)",
       "beginCaptures": {
-        "1": { "name": "variable.tinyspec" }
+        "1": { "name": "variable.tinyspec" },
+        "2": { "name": "keyword.operator.nulltype.tinyspec" }
       },
       "endCaptures": {
         "5": { "name": "punctuation.comma.tinyspec" }
       },
       "patterns": [
+        { "include": "#tinyspec-comment" },
         { "include": "#tinyspec-type-object" },
         { "include": "#tinyspec-colon" },
-        { "include": "#tinyspec-input-types" }
+        { "include": "#tinyspec-input-types" },
+        { "include": "#tinyspec-enum" }
       ]
     },
     "tinyspec-input-types": {
       "patterns": [
+        { "include": "#tinyspec-scalar-type" },
         {
-          "name": "meta.type.list.tinyspec",
-          "begin": "\\s*(\\[)",
-          "end": "\\s*(\\])(?:\\s*(!))?",
+          "match": "\\s*([_A-Za-z][_0-9A-Za-z]*)",
           "captures": {
-            "1": { "name": "meta.brace.square.tinyspec" },
-            "2": { "name": "keyword.operator.nulltype.tinyspec" }
-          },
-          "patterns": [
-            { "include": "#tinyspec-input-types" },
-            { "include": "#tinyspec-comma" }
-          ]
+            "1": { "name": "support.type.tinyspec" }
+          }
+        },
+        { "include": "#tinyspec-comment" },
+        { "include": "#tinyspec-array-type" }
+      ]
+    },
+    "tinyspec-array-type": {
+      "name": "meta.type.list.tinyspec",
+      "begin": "\\s*(\\[)",
+      "end": "\\s*(\\])",
+      "captures": {
+        "1": { "name": "meta.brace.square.tinyspec" }
+      },
+      "patterns": [
+        { "include": "#tinyspec-input-types" },
+        { "include": "#tinyspec-comma" }
+      ]
+    },
+
+    "tinyspec-scalar-type": {
+      "match": "\\s*\\b(f|i|s|b|d|o|t|j|integer|string|boolean|object|float|date|datetime|text|json)\\b\\s*",
+      "captures": {
+        "1": { "name": "support.type.builtin.tinyspec" }
+      }
+    },
+
+    "tinyspec-enum": {
+      "name": "meta.enum.tinyspec",
+      "begin": "\\s*\\(",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.operation.tinyspec"
+        }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.operation.tinyspec"
+        }
+      },
+      "patterns": [{ "include": "#tinyspec-enum-value" }]
+    },
+    "tinyspec-enum-value": {
+      "name": "constant.character.enum.tinyspec",
+      "match": "\\s*([_0-9A-Za-z][_0-9A-Za-z]*)"
+    },
+
+    "tinyspec-comment": {
+      "patterns": [
+        {
+          "comment": "need to prefix comment space with a scope else Atom's reflow cmd doesn't work",
+          "name": "comment.line.tinyspec.js",
+          "match": "(\\s*)(#).*",
+          "captures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.tinyspec"
+            }
+          }
+        }
+      ]
+    },
+    "tinyspec-model-description-comment": {
+      "patterns": [
+        {
+          "name": "comment.line.tinyspec.js",
+          "match": "(\\s*)(//).*",
+          "captures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.tinyspec"
+            }
+          }
         }
       ]
     },
