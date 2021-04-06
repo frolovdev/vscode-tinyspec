@@ -26,22 +26,38 @@
   "contributes": {
     "languages": [
       {
-        "id": "tinyspec",
+        "id": "tinyspecmodels",
         "aliases": [
-          "Tinyspec",
-          "tinyspec"
+          "Tinyspec models",
+          "tinyspec models"
         ],
         "extensions": [
           ".models.tinyspec"
+        ],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "tinyspecendpoints",
+        "aliases": [
+          "Tinyspec endpoints",
+          "tinyspec endpoints"
+        ],
+        "extensions": [
+          ".endpoints.tinyspec"
         ],
         "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
       {
-        "language": "tinyspec",
-        "scopeName": "source.tinyspec",
-        "path": "./syntaxes/tinyspec.tmLanguage.json"
+        "language": "tinyspecmodels",
+        "scopeName": "source.tinyspec.models",
+        "path": "./syntaxes/tinyspecmodels.tmLanguage.json"
+      },
+      {
+        "language": "tinyspecendpoints",
+        "scopeName": "source.tinyspec.endpoints",
+        "path": "./syntaxes/tinyspecendpoints.tmLanguage.json"
       }
     ]
   }

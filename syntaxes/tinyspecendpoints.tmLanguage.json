@@ -1,0 +1,75 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Tinyspec",
+  "scopeName": "source.tinyspec.endpoints",
+  "patterns": [
+    { "include": "#tinyspec-tag" },
+    { "include": "#tinyspec-comment" },
+    { "include": "#tinyspec-description-comment" }
+  ],
+  "repository": {
+    "tinyspec-tag": {
+      "name": "meta.type.interface.tinyspec",
+      "begin": "\\s*\\`([/:_A-Za-z][/:_0-9A-Za-z]*)\\`\\s*(:)\\s*",
+      "end": "(?=.)",
+      "applyEndPatternLast": 1,
+      "captures": {
+        "1": { "name": "support.type.tinyspec" },
+        "2": { "name": "keyword.operator.strict.tinyspec" }
+      },
+      "patterns": [
+        { "include": "#tinyspec-comment" },
+        { "include": "#tinyspec-http-methods" }
+      ]
+    },
+
+    "tinyspec-http-methods": {
+      "match": "\\s*\\b(POST|GET|PUT|PATCH|DELETE)\\b\\s*",
+      "captures": {
+        "1": { "name": "support.type.builtin.tinyspec" }
+      }
+    },
+    "tinyspec-comment": {
+      "patterns": [
+        {
+          "comment": "need to prefix comment space with a scope else Atom's reflow cmd doesn't work",
+          "name": "comment.line.tinyspec.js",
+          "match": "(\\s*)(#).*",
+          "captures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.tinyspec"
+            }
+          }
+        }
+      ]
+    },
+    "tinyspec-description-comment": {
+      "patterns": [
+        {
+          "name": "comment.line.tinyspec.js",
+          "match": "(\\s*)(//).*",
+          "captures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.tinyspec"
+            }
+          }
+        }
+      ]
+    },
+    "tinyspec-colon": {
+      "match": "\\s*(:)",
+      "captures": {
+        "1": { "name": "punctuation.colon.tinyspec" }
+      }
+    },
+    "tinyspec-comma": {
+      "match": "\\s*(,)",
+      "captures": {
+        "1": { "name": "punctuation.comma.tinyspec" }
+      }
+    },
+    "tinyspec-ignore-spaces": {
+      "match": "\\s*"
+    }
+  }
+}

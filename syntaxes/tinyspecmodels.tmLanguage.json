@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Tinyspec",
+  "scopeName": "source.tinyspec.models",
   "patterns": [
     { "include": "#tinyspec-comment" },
     { "include": "#tinyspec-model-description-comment" },
@@ -171,7 +172,5 @@
     "tinyspec-ignore-spaces": {
       "match": "\\s*"
     }
-  },
-
-  "scopeName": "source.tinyspec"
+  }
 }

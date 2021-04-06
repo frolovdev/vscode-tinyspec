@@ -1,0 +1,36 @@
+A {
+  b?: i,
+  c: (a | b | c),
+
+}
+
+A (
+  f | b | 
+)
+
+A # comment {
+  {
+  b,
+  # comment
+  b?,
+  -b: i,
+  -b?: i,
+  -b?: i,
+}
+
+MyModel {ekek: b[],kek: i[] }
+
+MyModel {color: (sample|42|true)}
+
+# commnet
+A !{
+  b?: i,
+  c: (a | b | c),
+
+}
+
+// My _perfect_ tiny model
+MyModel2 {dimensions?: Dimensions, color: Color}
+
+
+A < B, C {foo}

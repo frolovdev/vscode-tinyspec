@@ -1,0 +1,43 @@
+`/analytics_events`:
+    // **Create**
+    @token POST /analytics_events AnalyticsEventNewRequest
+        => AnalyticsEventNewResponse
+
+    // **Send**
+    @token POST /analytics_events/:id:i/complete AnalyticsEventComplete
+        => { event: AnalyticsEvent }
+
+`/conversations`:
+    // **Retrive conversations for entry**
+    @token GET /conversations/:entryType/:entryId
+        => ConversationResponse
+
+    // **Fetch conversation by id**
+    @token GET /conversations/:id
+        => ConversationResponse
+
+    // **Update conversation**
+    @token PATCH /conversations/:id ConversationUpdateRequest
+        => ConversationResponse
+
+`/tiger_documents`:
+    // **Create** tiger document
+    // Permissions: `*:documents:write`
+    POST /tiger_documents {document: TigerDocumentNew}
+        => TigerDocument
+
+    // **Get** tiger document
+    GET /tiger_documents/:id
+        => TigerDocument
+
+    // **Update** tiger document
+    PUT /tiger_documents/:id {document: o}
+        => TigerDocument
+
+    // **Send** for signature
+    POST /tiger_documents/:id/send_for_signature {messageSenderId?: i, conversationId?: i, ticketId?: i, taskId?: i, isNewTicketRequired?: b}
+        => {tigerDocument: TigerDocument, pandaDocument: PandaDocument, messageIds: i[]}
+
+    // **GET** tiger document as pdf
+    GET /tiger_documents/:id/download
+        => {}
