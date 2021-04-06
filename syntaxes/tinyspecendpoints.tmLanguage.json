@@ -5,29 +5,43 @@
   "patterns": [
     { "include": "#tinyspec-tag" },
     { "include": "#tinyspec-comment" },
-    { "include": "#tinyspec-description-comment" }
+    { "include": "#tinyspec-description-comment" },
+    { "include": "#tinyspec-http-methods" },
+    { "include": "#tinyspec-return-action" }
   ],
   "repository": {
     "tinyspec-tag": {
       "name": "meta.type.interface.tinyspec",
-      "begin": "\\s*\\`([/:_A-Za-z][/:_0-9A-Za-z]*)\\`\\s*(:)\\s*",
+      "begin": "\\s*\\`?([/:_A-Za-z][/:_0-9A-Za-z]*)\\`?\\s*(:)\\s*",
       "end": "(?=.)",
       "applyEndPatternLast": 1,
       "captures": {
-        "1": { "name": "support.type.tinyspec" },
-        "2": { "name": "keyword.operator.strict.tinyspec" }
+        "1": { "name": "string.double.tag.tinyspec" },
+        "2": { "name": "keyword.operator.colon.tinyspec" }
       },
-      "patterns": [
-        { "include": "#tinyspec-comment" },
-        { "include": "#tinyspec-http-methods" }
-      ]
+      "patterns": [{ "include": "#tinyspec-comment" }]
     },
 
     "tinyspec-http-methods": {
-      "match": "\\s*\\b(POST|GET|PUT|PATCH|DELETE)\\b\\s*",
+      "match": "\\s*\\b(POST|GET|PUT|PATCH|DELETE)\\b\\s*([/:_A-Za-z][/:_0-9A-Za-z]*)\\b\\s*([/:_A-Za-z][/:_0-9A-Za-z]*)\\b\\s*",
       "captures": {
-        "1": { "name": "support.type.builtin.tinyspec" }
+        "1": { "name": "constant.character.httpmethod.tinyspec" },
+        "2": { "name": "string.double.url.tinyspec" },
+        "3": { "name": "support.type.tinyspec" }
       }
+    },
+
+    "tinyspec-return-action" : {
+      "begin": "\\s*(\\=\\>)\\s*",
+      "end": "(?=.)",
+      "applyEndPatternLast": 1,
+      "captures": {
+        "1": { "name": "keyword.operator.return.tinyspec" }
+      },
+      "patterns": [
+        { "include": "#tinyspec-ignore-spaces" },
+        { "include": "#tinyspec-ignore-spaces" }
+      ]
     },
     "tinyspec-comment": {
       "patterns": [
@@ -70,6 +84,10 @@
     },
     "tinyspec-ignore-spaces": {
       "match": "\\s*"
+    },
+
+    "tinyspec-ignore-newlines": {
+      "match": "\\n*"
     }
   }
 }
