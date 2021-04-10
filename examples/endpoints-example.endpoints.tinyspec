@@ -41,3 +41,6 @@
     // **GET** tiger document as pdf
     GET /tiger_documents/:id/download
         => {}
+
+GET /hero/exchangeRates?HrGetExchangeRateRequestQuery
+  => HrGetExchangeRateListResponse
