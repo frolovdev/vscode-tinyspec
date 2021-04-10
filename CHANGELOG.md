@@ -1,9 +1,11 @@
 # Change Log
 
-All notable changes to the "tinyspec-lang" extension will be documented in this file.
+## v0.0.3
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Enhancements
 
-## [Unreleased]
+* add go to definition functionality (CMD + Click)
+ 
+### Fixes
 
-- Initial release
+* Add HEAD keyword highlight for endpoints ([issue#1](https://github.com/frolovdev/vscode-tinyspec/issues/1))

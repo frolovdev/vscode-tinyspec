@@ -23,7 +23,7 @@
     },
 
     "tinyspec-http-methods": {
-      "begin": "\\s*\\b(POST|GET|PUT|PATCH|DELETE)\\b\\s*([/:_A-Za-z][/:_0-9A-Za-z]*)\\s*([_A-Za-z][_0-9A-Za-z]*)?\\s*",
+      "begin": "\\s*\\b(POST|GET|PUT|PATCH|DELETE|HEAD)\\b\\s*([/:_A-Za-z][/:_0-9A-Za-z]*)\\s*([_A-Za-z][_0-9A-Za-z]*)?\\s*",
       "end": "(?=.)",
       "applyEndPatternLast": 1,
       "captures": {
