@@ -9,3 +9,9 @@
 ### Fixes
 
 * Add HEAD keyword highlight for endpoints ([issue#1](https://github.com/frolovdev/vscode-tinyspec/issues/1))
+
+## v0.0.4
+
+### Docs
+
+* enhance readme
